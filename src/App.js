@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Button from "./components/Button/Button";
+import Counter from "./components/Counter/Counter";
+import Counter2 from './components/Counter2/Counter2'
+import CounterContextProvider from "./counteContext";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
+// users
+import AddForm from './components/AddForm/AddForm';
+import EditForm from './components/EditForm/EditForm';
+import Details from './components/Details/Details';
+import UserList from './components/UserList/UserList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <CounterContextProvider >  
+    <BrowserRouter>
+      <Routes>
+        <Route path="counter" element= {<Counter />}/>
+        <Route path="counter2" element = {<Counter2 />} />
+
+        {/* users route  */}
+        <Route path="/edit/:id" element = {<EditForm />}/>
+        <Route path="/details/:id" element = {<Details />}/>
+        <Route path="/users" element = {<><AddForm /> <UserList /></>}/>
+      </Routes>
+    </BrowserRouter>
+  </CounterContextProvider>
   );
 }
 
